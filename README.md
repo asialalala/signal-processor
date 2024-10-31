@@ -9,8 +9,6 @@ This project is simple signal processor based on audacity functionalities.
 ## Technologies
 Project is created with:
 * Python 3.12.5
-<!-- * Ipsum version: 2.33 -->
-<!-- * Ament library version: 999 -->
 
 
 ## Setup

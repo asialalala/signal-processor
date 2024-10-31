@@ -6,6 +6,7 @@
 - Implement function to
 - Create function to display diagrams/charts
 - Add simple ui
+- Watch this [video](https://www.youtube.com/watch?v=I7hlBmn83TY)
 
 # POC notes
 Prof of concept
