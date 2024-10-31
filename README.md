@@ -14,15 +14,10 @@ Project is created with:
 
 
 ## Setup
-If you use VS Code, it is recommended to follow the [instruction](https://code.visualstudio.com/docs/python/python-tutorial)
+If you use VS Code, it is recommended to follow the [instruction](https://code.visualstudio.com/docs/python/python-tutorial) which helps you prepare the environment.
+
 ### Necessary packages
-All packages you need to run this apllication are listed in requirements.txt. To install them you can run the following command
+All packages you need to run this application are listed in requirements.txt. To install them you can run the following command.
 ```
 pip3 install -r requirements.txt
 ```
-To run this project, install it locally:
-<!-- ```
-$ cd ../lorem
-$ npm install
-$ npm start
-``` -->
