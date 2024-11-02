@@ -9,7 +9,7 @@ Program składa się z trzech plików: `efekty.py`, `gui.py`, i `main.py`. Poni�
 Program wymaga kilku bibliotek do działania. Możesz je zainstalować, uruchamiając następującą komendę:
 
 ```bash
-pip install numpy librosa scipy PySimpleGUI soundfile
+pip install numpy librosa scipy PySimpleGUI soundfile mixer
 ```
 
 #### 2. **Opis plików**

@@ -1,0 +1,3 @@
+- Naprawić zmianę wysokości dźwięku, zmiane tempa
+- Ściszanie jest nieznane
+- Podgłaśnianie ścisza

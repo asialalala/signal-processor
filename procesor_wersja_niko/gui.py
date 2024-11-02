@@ -1,5 +1,5 @@
 import PySimpleGUI as sg
-from main import apply_effect
+from main import apply_effect, start, pause
 
 def create_window():
     layout = [
@@ -53,7 +53,10 @@ def create_window():
             [sg.Slider(range=(0, 1), resolution=0.1, orientation='h', key='volume_factor_attenuate')],
         ], key='attenuate_params', visible=False))],
 
-        [sg.Button('Zastosuj efekt'), sg.Button('Wyjście')]
+        [sg.Button('Zastosuj efekt'), sg.Button('Start'), sg.Button('Pause')],
+
+        [sg.Button('Wyjście')]
+
     ]
     return sg.Window('Procesor Dźwięku', layout, finalize=True)
 
@@ -120,6 +123,12 @@ def main():
                 apply_effect(file_path, 'attenuate', factor)
 
             sg.popup("Efekt został zastosowany! Plik zapisany jako 'przetworzony_plik_audio.wav'.")
+            
+        if event == 'Start':
+            start('przetworzony_plik_audio.wav')
+        elif event == 'Pause':
+            pause()
+    
 
     window.close()
 
