@@ -42,3 +42,10 @@ python gui.py
 ---
 
 Testowana była funkcja echo i na pewno działa
+
+### Diagram przypadków uzycia
+Poniej przedstawiono diagram przypadków uzycia, na ktorym widoczne sa operacje dostepne dla urzytkownika.
+W celu edycji diagramu mozna skorzystac z nastepujacego [linku](https://app.diagrams.net/#G1ui_W7STf7rl0ggz2sRm-IsosKM65SGZI#%7B%22pageId%22%3A%22CR_MfkM-ACaT6Vu6J4YW%22%7D),
+a następnie pobrać edytowany plik i go podmienić.
+
+![diagram przypadkow uzycia](./procesorSygnałowy.drawio.png)
