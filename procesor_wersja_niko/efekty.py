@@ -25,11 +25,11 @@ def add_echo(y, sr, delay=0.2, decay=0.5):
 
 def pitch_shift(y, sr, n_steps):
     """Zmienia wysokość dźwięku o podaną liczbę półtonów."""
-    return librosa.effects.pitch_shift(y, sr, n_steps=n_steps)
+    return librosa.effects.pitch_shift(y, sr=sr, n_steps=n_steps)
 
 def change_tempo(y, rate):
     """Zmienia tempo odtwarzania sygnału audio."""
-    return librosa.effects.time_stretch(y, rate)
+    return librosa.effects.time_stretch(y, rate=rate)
 
 def amplify(y, factor):
     """Podgłaśnia sygnał audio przez mnożenie amplitudy przez factor."""
