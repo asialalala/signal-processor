@@ -20,6 +20,7 @@ pip install numpy librosa scipy PySimpleGUI soundfile mixer
      - Przesunięcie wysokości dźwięku (pitch shift)
      - Zmiana tempa
      - Podgłośnienie i ściszenie
+     - Edycja basów i sopranów
    - **`gui.py`**: Tworzy graficzny interfejs użytkownika przy użyciu `PySimpleGUI`. Umożliwia wybór pliku audio oraz efektu, który ma zostać zastosowany. Interfejs zapewnia również możliwość ustawienia parametrów dla wybranego efektu.
    - **`main.py`**: Obsługuje ładowanie pliku audio i zastosowanie wybranego efektu przy użyciu funkcji z pliku `efekty.py`. Zapisuje przetworzony plik jako `przetworzony_plik_audio.wav`.
 
