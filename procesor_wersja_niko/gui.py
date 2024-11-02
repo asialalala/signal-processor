@@ -1,5 +1,6 @@
 import PySimpleGUI as sg
 from main import apply_effect, start, pause
+from pygame import mixer
 
 def create_window():
     layout = [
@@ -43,7 +44,7 @@ def create_window():
         [sg.Radio('Podgłośnienie', 'effect', key='amplify', enable_events=True)],
         [sg.pin(sg.Column([
             [sg.Text('Współczynnik podgłośnienia (np. 1.5):')],
-            [sg.Slider(range=(1, 2), resolution=0.1, orientation='h', key='volume_factor_amplify')],
+            [sg.Slider(range=(1, 50), resolution=0.1, orientation='h', key='volume_factor_amplify')],
         ], key='amplify_params', visible=False))],
 
         # Attenuate Effect
@@ -53,7 +54,9 @@ def create_window():
             [sg.Slider(range=(0, 1), resolution=0.1, orientation='h', key='volume_factor_attenuate')],
         ], key='attenuate_params', visible=False))],
 
-        [sg.Button('Zastosuj efekt'), sg.Button('Start'), sg.Button('Pause')],
+        # Test sample
+        [sg.Button('Zastosuj efekt')],
+        [sg.Button('Start'), sg.Button('Pause')],
 
         [sg.Button('Wyjście')]
 
@@ -81,6 +84,10 @@ def update_visibility(values, window):
 
 def main():
     window = create_window()
+    effect_created = False
+    is_playing = False
+    sound : any
+    sound_channel = mixer.Channel(1)
 
     while True:
         event, values = window.read()
@@ -122,14 +129,21 @@ def main():
                 factor = values['volume_factor_attenuate']
                 apply_effect(file_path, 'attenuate', factor)
 
+            effect_created = True
             sg.popup("Efekt został zastosowany! Plik zapisany jako 'przetworzony_plik_audio.wav'.")
             
         if event == 'Start':
+            if not effect_created:
+                sg.popup('Proszę zastosować efekt.')
+                continue
             start('przetworzony_plik_audio.wav')
+
         elif event == 'Pause':
+            if not effect_created:
+                sg.popup('Proszę zastosować efekt.')
+                continue
             pause()
     
-
     window.close()
 
 if __name__ == "__main__":

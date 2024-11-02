@@ -34,3 +34,7 @@ def change_tempo(y, rate):
 def amplify(y, factor):
     """Podgłaśnia sygnał audio przez mnożenie amplitudy przez factor."""
     return y * factor
+
+def attenuate(y, factor):
+    """Ścisza sygnał audio przez mnozenie amplitudy przez factor."""
+    return y * factor
