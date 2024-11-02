@@ -1,3 +1,4 @@
 - Ściszanie jest nieznane
-- Podgłaśnianie ścisza, przerobienine na decybele??
 - Inne efekty wah-wah, basy i soprany
+- Nazywanie pliku po swojemu
+- Wykres przebiegu ?

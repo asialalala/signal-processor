@@ -33,11 +33,6 @@ def change_tempo(y, rate):
 
 def amplify(y, factor):
     """Podgłaśnia sygnał audio przez mnożenie amplitudy przez factor."""
-    librosa.amplitude_to_db()
-    return y * factor
-
-def attenuate(y, factor):
-    """Ścisza sygnał audio przez mnozenie amplitudy przez factor."""
     return y * factor
 
 def bass_soprano(y, sr,  bass_factor, soprano_factor):

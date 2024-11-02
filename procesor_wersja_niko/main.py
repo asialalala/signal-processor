@@ -1,7 +1,7 @@
 # main.py
 import librosa
 import soundfile as sf
-from efekty import amplify, normalize_audio, add_reverb, add_echo, pitch_shift, change_tempo, attenuate, bass_soprano
+from efekty import amplify, normalize_audio, add_reverb, add_echo, pitch_shift, change_tempo, bass_soprano
 from pygame import mixer
 
 mixer.init()
@@ -27,7 +27,7 @@ def apply_effect(file_path, effect_name, *args):
     elif effect_name == 'amplify':
         y_processed = amplify(y, *args)
     elif effect_name == 'attenuate':
-        y_processed = attenuate(y, *args)
+        y_processed = amplify(y, *args)
     elif effect_name == 'bass_soprano':
         y_processed = bass_soprano(y, sr, *args)
     else:

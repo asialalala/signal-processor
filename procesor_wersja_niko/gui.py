@@ -44,7 +44,7 @@ def create_window():
         [sg.Radio('Podgłośnienie', 'effect', key='amplify', enable_events=True)],
         [sg.pin(sg.Column([
             [sg.Text('Współczynnik podgłośnienia (np. 1.5):')],
-            [sg.Slider(range=(1, 50), resolution=0.1, orientation='h', key='volume_factor_amplify')],
+            [sg.Slider(range=(1, 10), resolution=0.1, orientation='h', key='volume_factor_amplify')],
         ], key='amplify_params', visible=False))],
 
         # Attenuate Effect
@@ -138,7 +138,7 @@ def main():
                 apply_effect(file_path, 'amplify', factor)
             elif values['attenuate']:
                 factor = values['volume_factor_attenuate']
-                apply_effect(file_path, 'attenuate', factor)
+                apply_effect(file_path, 'amplify', factor)
             elif values['bass_soprano']:
                 bass_factor = values['volume_bas_factor']
                 soprano_factor = values['volume_bas_factor']
