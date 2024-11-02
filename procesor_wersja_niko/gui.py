@@ -54,6 +54,15 @@ def create_window():
             [sg.Slider(range=(0, 1), resolution=0.1, orientation='h', key='volume_factor_attenuate')],
         ], key='attenuate_params', visible=False))],
 
+        # Bas sopran volume up Effect
+        [sg.Radio('Bas i sopran', 'effect', key='bass_soprano', enable_events=True)],
+        [sg.pin(sg.Column([
+            [sg.Text('Współczynnik zgłośnienia basu (np. 0.5):')],
+            [sg.Slider(range=(0, 1), resolution=0.1, orientation='h', key='volume_bas_factor')],
+            [sg.Text('Współczynnik zgłośnienia sopranu (np. 0.5):')],
+            [sg.Slider(range=(0, 1), resolution=0.1, orientation='h', key='volume_soprano_factor')],
+        ], key='bass_soprano_params', visible=False))],
+
         # Test sample
         [sg.Button('Zastosuj efekt')],
         [sg.Button('Start'), sg.Button('Pause')],
@@ -65,7 +74,7 @@ def create_window():
 
 def update_visibility(values, window):
     # Hide all parameter controls
-    for key in ['reverb_params', 'echo_params', 'pitch_shift_params', 'tempo_change_params', 'amplify_params', 'attenuate_params']:
+    for key in ['reverb_params', 'echo_params', 'pitch_shift_params', 'tempo_change_params', 'amplify_params', 'attenuate_params', 'bass_soprano_params']:
         window[key].update(visible=False)
 
     # Show parameter controls for the selected effect
@@ -81,6 +90,8 @@ def update_visibility(values, window):
         window['amplify_params'].update(visible=True)
     elif values['attenuate']:
         window['attenuate_params'].update(visible=True)
+    elif values['bass_soprano']:
+        window['bass_soprano_params'].update(visible=True)
 
 def main():
     window = create_window()
@@ -96,7 +107,7 @@ def main():
             break
 
         # Update parameter visibility based on selected effect
-        if event in ('normalize', 'reverb', 'echo', 'pitch_shift', 'tempo_change', 'amplify', 'attenuate'):
+        if event in ('normalize', 'reverb', 'echo', 'pitch_shift', 'tempo_change', 'amplify', 'attenuate', 'bass_soprano'):
             update_visibility(values, window)
 
         # Apply the selected effect
@@ -128,6 +139,10 @@ def main():
             elif values['attenuate']:
                 factor = values['volume_factor_attenuate']
                 apply_effect(file_path, 'attenuate', factor)
+            elif values['bass_soprano']:
+                bass_factor = values['volume_bas_factor']
+                soprano_factor = values['volume_bas_factor']
+                apply_effect(file_path, 'bass_soprano', bass_factor, soprano_factor)
 
             effect_created = True
             sg.popup("Efekt został zastosowany! Plik zapisany jako 'przetworzony_plik_audio.wav'.")

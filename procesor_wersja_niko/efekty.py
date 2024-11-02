@@ -33,8 +33,40 @@ def change_tempo(y, rate):
 
 def amplify(y, factor):
     """Podgłaśnia sygnał audio przez mnożenie amplitudy przez factor."""
+    librosa.amplitude_to_db()
     return y * factor
 
 def attenuate(y, factor):
     """Ścisza sygnał audio przez mnozenie amplitudy przez factor."""
     return y * factor
+
+def bass_soprano(y, sr,  bass_factor, soprano_factor):
+    """Podgłaśnia basy mnoąc przez bass_factor i soprany mnozac przez soprano_factor. 
+    Oparte na implementacji https://librosa.org/doc/main/auto_examples/plot_vocal_separation.html """
+    S_full, phase = librosa.magphase(librosa.stft(y))
+    # Tworzenie filtru, ktory podzieli dzwiekna na ten z czestotliwoscia poniezej i powyzej
+    # mediany czestotliwosci wystepujacych w calym nagraniu
+    S_filter = librosa.decompose.nn_filter(S_full,
+                                       aggregate=np.median,
+                                       metric='cosine',
+                                       width=int(librosa.time_to_frames(2, sr=sr)))
+    S_filter = np.minimum(S_full, S_filter)
+    
+    margin_i, margin_v = 2, 10
+    power = 2
+
+    # Naloz maske aby podzielic nagranie na sopran i bas
+    mask_i = librosa.util.softmask(S_filter,
+                               margin_i * (S_full - S_filter),
+                               power=power)
+
+    mask_v = librosa.util.softmask(S_full - S_filter,
+                               margin_v * S_filter,
+                               power=power)
+    S_soprano = mask_v * S_full
+    S_bass = mask_i * S_full
+
+    y_soprano = librosa.istft(S_soprano * phase) #* soprano_factor
+    y_bass = librosa.istft(S_bass * phase) #* bass_factor
+    y_processed = y_soprano + y_bass # tutaj chyba inaczej powinien byc dodany ten dzwiek
+    return y_processed
