@@ -4,9 +4,17 @@ import librosa
 import scipy.signal as signal
 import matplotlib.pyplot as plt
 
-def normalize_audio(y):
-    """Normalizuje sygnał audio do zakresu [-1, 1]."""
-    return y / np.max(np.abs(y))
+def normalize_audio(y, target_min=-0.5, target_max=0.5):
+    """Normalizuje sygnał audio do wskazanego zakresu."""
+    print("Sygnał pierwotny:")
+    print(y)
+    sig_min = np.min(y)
+    sig_max = np.max(y)
+    normalized = (y - sig_min)/(sig_max - sig_min)
+    result = normalized * (target_max - target_min) + target_min
+    print("Wynik: ")
+    print(result)
+    return result
 
 def add_reverb(y, sr, reverb_amount=0.5):
     """Dodaje pogłos do sygnału audio."""

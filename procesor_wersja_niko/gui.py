@@ -9,6 +9,12 @@ def create_window():
 
         # Normalization Effect
         [sg.Radio('Normalizacja', 'effect', key='normalize', enable_events=True)],
+        [sg.pin(sg.Column([
+            [sg.Text('Minimalna wartość:')],
+            [sg.Slider(range=(-1, 1), resolution=0.1, orientation='h', key='target_min')],
+            [sg.Text('Maksymalna wartość:')],
+            [sg.Slider(range=(-1, 1), resolution=0.1, orientation='h', key='target_max')],
+        ], key='normalize_params', visible=False))],
 
         # Reverb Effect
         [sg.Radio('Pogłos', 'effect', key='reverb', enable_events=True)],
@@ -67,12 +73,14 @@ def create_window():
 
 def update_visibility(values, window):
     # Hide all parameter controls
-    for key in ['reverb_params', 'echo_params', 'pitch_shift_params', 'tempo_change_params', 'amplify_params', 'bass_soprano_params']:
+    for key in ['normalize_params', 'reverb_params', 'echo_params', 'pitch_shift_params', 'tempo_change_params', 'amplify_params', 'bass_soprano_params']:
         window[key].update(visible=False)
 
     # Show parameter controls for the selected effect
     if values['reverb']:
         window['reverb_params'].update(visible=True)
+    elif values['normalize']:
+        window['normalize_params'].update(visible=True)
     elif values['echo']:
         window['echo_params'].update(visible=True)
     elif values['pitch_shift']:
@@ -110,7 +118,12 @@ def main():
 
             # Determine which effect to apply and collect parameters
             if values['normalize']:
-                apply_effect(file_path, 'normalize')
+                target_min = values['target_min']
+                target_max = values['target_max']
+                if target_min > target_max:
+                    sg.popup('Wartość minimalna musi być mniejsza od maksymalnej.')
+                    continue
+                apply_effect(file_path, 'normalize', target_min, target_max)
             elif values['reverb']:
                 reverb_amount = values['reverb_amount']
                 apply_effect(file_path, 'reverb', reverb_amount)

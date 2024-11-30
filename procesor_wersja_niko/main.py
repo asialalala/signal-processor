@@ -15,7 +15,7 @@ def apply_effect(file_path, effect_name, *args):
 
     # Zastosowanie wybranego efektu
     if effect_name == 'normalize':
-        y_processed = normalize_audio(y)
+        y_processed = normalize_audio(y, *args)
     elif effect_name == 'reverb':
         y_processed = add_reverb(y, sr, *args)
     elif effect_name == 'echo':
