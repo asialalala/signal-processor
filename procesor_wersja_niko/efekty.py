@@ -40,7 +40,7 @@ def bass_soprano(y, sr,  bass_factor=1, soprano_factor=1):
     """Podgłaśnia basy mnoąc przez bass_factor i soprany mnozac przez soprano_factor. 
     Oparte na implementacji https://librosa.org/doc/main/auto_examples/plot_vocal_separation.html """
     S_full, phase = librosa.magphase(librosa.stft(y))
-    # Tworzenie filtru, ktory podzieli dzwiekna na ten z czestotliwoscia poniezej i powyzej
+    # Tworzenie filtru, ktory podzieli dzwiekna na ten z czestotliwoscia ponizej i powyzej
     # mediany czestotliwosci wystepujacych w calym nagraniu
     S_filter = librosa.decompose.nn_filter(S_full,
                                        aggregate=np.mean,
@@ -66,19 +66,10 @@ def bass_soprano(y, sr,  bass_factor=1, soprano_factor=1):
 
     y_soprano = librosa.istft(S_soprano * phase)
     y_bass = librosa.istft(S_bass * phase)
-    print("y_soprano ")
-    print(y_soprano )
-    print("y_bass ")
-    print(y_bass )
 
-    print("soprano_factor ", soprano_factor)
-    print("bass_factor ", bass_factor)
     y_soprano = y_soprano * soprano_factor
     y_bass = y_bass * bass_factor
-    print("y_soprano ")
-    print(y_soprano )
-    print("y_bass ")
-    print(y_bass )
+
 
     y_processed = y_soprano + y_bass # tutaj chyba inaczej powinien byc dodany ten dzwiek
     return y_processed

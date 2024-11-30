@@ -41,18 +41,11 @@ def create_window():
         ], key='tempo_change_params', visible=False))],
 
         # Amplify Effect
-        [sg.Radio('Podgłośnienie', 'effect', key='amplify', enable_events=True)],
+        [sg.Radio('Podgłośnienie i ściszenie', 'effect', key='amplify', enable_events=True)],
         [sg.pin(sg.Column([
             [sg.Text('Współczynnik podgłośnienia (np. 1.5):')],
-            [sg.Slider(range=(1, 10), resolution=0.1, orientation='h', key='volume_factor_amplify')],
+            [sg.Slider(range=(0, 10), resolution=0.1, orientation='h', key='volume_factor_amplify')],
         ], key='amplify_params', visible=False))],
-
-        # Attenuate Effect
-        [sg.Radio('Ściszenie', 'effect', key='attenuate', enable_events=True)],
-        [sg.pin(sg.Column([
-            [sg.Text('Współczynnik ściszenia (np. 0.5):')],
-            [sg.Slider(range=(0, 1), resolution=0.1, orientation='h', key='volume_factor_attenuate')],
-        ], key='attenuate_params', visible=False))],
 
         # Bas sopran volume up Effect
         [sg.Radio('Bas i sopran', 'effect', key='bass_soprano', enable_events=True)],
@@ -74,7 +67,7 @@ def create_window():
 
 def update_visibility(values, window):
     # Hide all parameter controls
-    for key in ['reverb_params', 'echo_params', 'pitch_shift_params', 'tempo_change_params', 'amplify_params', 'attenuate_params', 'bass_soprano_params']:
+    for key in ['reverb_params', 'echo_params', 'pitch_shift_params', 'tempo_change_params', 'amplify_params', 'bass_soprano_params']:
         window[key].update(visible=False)
 
     # Show parameter controls for the selected effect
@@ -88,8 +81,6 @@ def update_visibility(values, window):
         window['tempo_change_params'].update(visible=True)
     elif values['amplify']:
         window['amplify_params'].update(visible=True)
-    elif values['attenuate']:
-        window['attenuate_params'].update(visible=True)
     elif values['bass_soprano']:
         window['bass_soprano_params'].update(visible=True)
 
@@ -107,7 +98,7 @@ def main():
             break
 
         # Update parameter visibility based on selected effect
-        if event in ('normalize', 'reverb', 'echo', 'pitch_shift', 'tempo_change', 'amplify', 'attenuate', 'bass_soprano'):
+        if event in ('normalize', 'reverb', 'echo', 'pitch_shift', 'tempo_change', 'amplify', 'bass_soprano'):
             update_visibility(values, window)
 
         # Apply the selected effect
@@ -135,9 +126,6 @@ def main():
                 apply_effect(file_path, 'tempo_change', rate)
             elif values['amplify']:
                 factor = values['volume_factor_amplify']
-                apply_effect(file_path, 'amplify', factor)
-            elif values['attenuate']:
-                factor = values['volume_factor_attenuate']
                 apply_effect(file_path, 'amplify', factor)
             elif values['bass_soprano']:
                 bass_factor = values['volume_bas_factor']
