@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>instrukcja_uruchomienia.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h3 id="opis-dzia%C5%82ania-programu-do-przetwarzania-d%C5%BAwi%C4%99ku">Opis działania programu do przetwarzania dźwięku</h3>
+<p>Projekt jest realizacją procesora sygnałowego zaimplementowanego w języku programowym Python.
+Aplikacja umozliwia użytkownikowi wybór efektu i dostosowania parametrów oraz podglądu efektów na pliku dźwiękowym, z możliwością odtwarzania i pauzowania przetworzonego pliku.
+Nie jest mozliwe nakładanie efektów na siebie.</p>
+<p>Program składa się z trzech plików: <code>efekty.py</code>, <code>gui.py</code>, i <code>main.py</code>. Poniżej znajdziesz instrukcję krok po kroku oraz szczegóły dotyczące działania programu.</p>
+<hr>
+<h3 id="opis-dzia%C5%82ania-krok-po-kroku">Opis działania krok po kroku:</h3>
+<ol>
+<li><strong>Wybór pliku audio</strong>: Po uruchomieniu <code>gui.py</code>, pojawi się okno, w którym możesz wybrać plik audio z komputera.</li>
+<li><strong>Wybór efektu</strong>: Wybierz jeden z efektów (normalizacja, pogłos, echo, itp.).</li>
+<li><strong>Ustawienie parametrów efektu</strong> (opcjonalnie): Dla niektórych efektów dostępne są dodatkowe parametry, np. poziom pogłosu, opóźnienie echa czy współczynnik pogłośnienia.</li>
+<li><strong>Zastosowanie efektu</strong>: Kliknij przycisk „Zastosuj efekt”. Plik audio zostanie przetworzony i zapisany jako <code>przetworzony_plik_audio.wav</code> w tym samym folderze, co plik źródłowy.</li>
+</ol>
+<hr>
+<h3 id="diagram-przypadk%C3%B3w-uzycia">Diagram przypadków uzycia</h3>
+<p>Ponizej przedstawiono diagram przypadków uzycia, na ktorym widoczne sa operacje dostepne dla urzytkownika.
+W celu edycji diagramu mozna skorzystac z nastepujacego <a href="https://app.diagrams.net/#G1ui_W7STf7rl0ggz2sRm-IsosKM65SGZI#%7B%22pageId%22%3A%22CR_MfkM-ACaT6Vu6J4YW%22%7D">linku</a>,
+a następnie pobrać edytowany plik i go podmienić.</p>
+<p><img src="./procesorSygnałowy.drawio.png" alt="diagram przypadkow uzycia"></p>
+<hr>
+<h3 id="opis-s%C5%82owny-architektury-planowanego-oprogramowania">Opis słowny architektury planowanego oprogramowania</h3>
+<ul>
+<li>Wejścia
+<ul>
+<li><em>Plik audio</em> z rozszerzeniem .wav, który ma być przetwarzany</li>
+<li><em>Efekt dźwiękowy</em>, który ma być nałożony na wybrany plik</li>
+<li><em>Parametry efektu</em>, o ile są wymagane</li>
+</ul>
+</li>
+<li>Przetwarzanie wewnętrzne
+<ul>
+<li><em>Moduł GUI</em> składa się z wyboru pliku audio, wyboru efektu oraz parametrów, a take przycisku odtwarzania i wstrzymywania nagrania.</li>
+<li><em>Moduł przetwarzania audio</em> umozliwia nałozenie efektu na wgrany plik audio. Wymaga podania sygnału <em>y</em> oraz częstotliwości jego próbkowania <em>sr</em>. Dostepne sa ponizej wymienione [efekty]</li>
+<li><em>Moduł odtwarzania audio</em> realizujący odtworzenie, wstrzymanie oraz wznowienie przetworzonego dźwięku.</li>
+</ul>
+</li>
+<li>Wyjścia
+<ul>
+<li><em>Przetworzony plik audio</em>, czyli wynik nałozenia efektu na wczytany plik,</li>
+<li><em>Interfejs użytkownika</em>, informujący o aktualnie wykonywanych działaniach.</li>
+</ul>
+</li>
+<li>Struktura danych
+<ul>
+<li><em>Tablica NumPy</em>, która przechowuje sygnał dźwiękowy <em>y</em> w postaci próbek.</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="opis-teoretyczny-zaimplementowanych-efekt%C3%B3w-efekty">Opis teoretyczny zaimplementowanych efektów [efekty]</h3>
+<ul>
+<li>Normalizacja - normalizuje sygnał audio <em>y</em> do zakresu [-1, 1],</li>
+<li>Dodawanie pogłosu - dodaje efekt pogłosu o wskazanym poziomie,</li>
+<li>Dodawanie echa - dodaje efekt echa z wskazanym opóźnieniem i współczynnikiem zaniku,</li>
+<li>Przesunięcie wysokości dźwięku (pitch shift) - zmienia wysokość dźwięku o wskazaną różnicę,</li>
+<li>Zmiana tempa - zwiększa lub zmniejsza tempo dźwięku o wskazany współczynnik bez zmiany częstotliwości dźwięku,</li>
+<li>Pogłośnienie i ściszenie - pogłaśnia lub ścisza dźwięk o wskazany współczynnik,</li>
+<li>Edycja basów i sopranów - umożliwia wzmocnienie basow lub sopranow.</li>
+</ul>
+<hr>
+<h3 id="instrukcja-uruchomienia">Instrukcja uruchomienia</h3>
+<h4 id="1-zainstaluj-wymagane-biblioteki">1. <strong>Zainstaluj wymagane biblioteki</strong></h4>
+<p>Program wymaga kilku bibliotek do działania. Możesz je zainstalować, uruchamiając następującą komendę:</p>
+<pre class="hljs"><code><div>pip install numpy librosa scipy PySimpleGUI soundfile pygame
+</div></code></pre>
+<h4 id="2-uruchomienie-programu">2. <strong>Uruchomienie programu</strong></h4>
+<p>Aby uruchomić aplikację z interfejsem graficznym, wykonaj w terminalu następujące polecenie:</p>
+<pre class="hljs"><code><div>python gui.py
+</div></code></pre>
+<hr>
+<h3 id="struktura-kodu">Struktura kodu</h3>
+<p>Program tworzy aplikację do przetwarzania dźwięku z interfejsem graficznym. Składa się z kilku modułów:</p>
+<ul>
+<li>Plik <strong><code>efekty.py</code></strong>: Zawiera funkcje implementujące różne efekty audio, takie jak normalizacja, dodawanie pogłosu, echa, zmiana wysokości dźwięku, tempa, podgłośnienie oraz modyfikację basów i sopranów. Wykorzystuje biblioteki takie jak numpy, librosa i scipy do przetwarzania sygnału audio.</li>
+<li>Plik <strong><code>gui.py</code></strong>: Służy do wczytywania plików audio, stosowania wybranych efektów z efekty.py oraz zapisywania przetworzonych plików. Używa również biblioteki pygame do odtwarzania dźwięku.</li>
+<li>Plik <strong><code>main.py</code></strong>: Zbudowany za pomocą biblioteki PySimpleGUI, umożliwia użytkownikowi wybór pliku audio, efektu do zastosowania oraz regulację parametrów efektu. Pozwala także na odtwarzanie i pauzowanie przetworzonego dźwięku.</li>
+</ul>
+<p>Aplikacja integruje te komponenty, umożliwiając interaktywne przetwarzanie i odsłuchiwanie zmodyfikowanych plików audio za pomocą przyjaznego dla użytkownika interfejsu.</p>
+<hr>
+<h3 id="wykorzystane-biblioteki">Wykorzystane biblioteki</h3>
+<p>Program wykorzystuje kilka bibliotek Pythona, które wspólnie umożliwiają przetwarzanie dźwięku, interakcję z użytkownikiem poprzez interfejs graficzny oraz odtwarzanie przetworzonego audio. Oto opis użytych bibliotek:</p>
+<ul>
+<li><strong>NumPy</strong>: to podstawowa biblioteka Pythona do obliczeń naukowych. Zapewnia wsparcie dla wielowymiarowych tablic i macierzy oraz bogaty zestaw funkcji matematycznych do operacji na tych strukturach danych. Używana do przetwarzania i manipulacji sygnałami audio reprezentowanymi jako tablice numeryczne. Przykłady zastosowań w programie to normalizacja sygnału czy operacje matematyczne na danych audio.</li>
+<li><strong>Librosa</strong>: Librosa to biblioteka przeznaczona do analizy muzyki i dźwięku w Pythonie. Dostarcza narzędzia do ekstrakcji cech dźwiękowych, przetwarzania sygnałów oraz manipulacji dźwiękiem. W programie zostały wykorzystane następujące funkcjonalności: librosa.load pozwala na załadowanie pliku audio do programu, librosa.effects.time_stretch pozwala na przyspieszenie lub spowolnienie odtwarzania bez zmiany wysokości dźwięku, oraz w funkcji bass_soprano używana jest do oddzielenia komponentów basowych i sopranowych sygnału audio.</li>
+<li><strong>SciPy Signal</strong>: Moduł signal z biblioteki SciPy dostarcza narzędzia do przetwarzania sygnałów, takie jak filtrowanie, konwolucja czy analiza widmowa. Używany do dodawania efektu pogłosu (reverb). Funkcja signal.fftconvolve pozwala na wykonanie szybkiej konwolucji sygnału audio z jądrem pogłosu, co symuluje efekt przestrzeni akustycznej.</li>
+<li><strong>SoundFile</strong>: SoundFile to biblioteka do odczytu i zapisu plików audio, oparta na libsndfile. Obsługuje różne formaty audio i pozwala na łatwe zapisywanie i odczytywanie danych dźwiękowych.</li>
+<li><strong>Pygame</strong>: Pygame to zestaw modułów Pythona przeznaczony do tworzenia gier i aplikacji multimedialnych. Oferuje funkcje do obsługi grafiki, dźwięku i interakcji z użytkownikiem.  W szczególności używany jest moduł pygame.mixer do: inicjalizacji systemu audio za pomocą mixer.init(), ładowania i odtwarzania plików dźwiękowych poprzez mixer.Sound, sound_channel.play i kontroli odtwarzania.</li>
+<li><strong>PySimpleGUI</strong>:  to biblioteka upraszczająca tworzenie interfejsów graficznych w Pythonie.</li>
+</ul>
+<hr>
+<h3 id="problemy">Problemy</h3>
+<p>Problem ze znalezieniem odpowiedniego przykładu, który pokazałby w znaczący sposób działanie filtru normalizacji. Powinna być to próbka o zroznicowanych wartościach.</p>
+<hr>
+<h3 id="u%C5%BCyte-metody">Użyte metody</h3>
+<h4 id="1-efektypy">1. <strong>efekty.py</strong></h4>
+<p><strong>normalizacja</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">normalize_audio</span><span class="hljs-params">(y, target_min=<span class="hljs-number">-0.5</span>, target_max=<span class="hljs-number">0.5</span>)</span>:</span>
+    <span class="hljs-string">"""Normalizuje sygnał audio do wskazanego zakresu."""</span>
+    print(<span class="hljs-string">"Sygnał pierwotny:"</span>)
+    print(y)
+    sig_min = np.min(y)
+    sig_max = np.max(y)
+    normalized = (y - sig_min)/(sig_max - sig_min)
+    result = normalized * (target_max - target_min) + target_min
+    print(<span class="hljs-string">"Wynik: "</span>)
+    print(result)
+    <span class="hljs-keyword">return</span> result
+</div></code></pre>
+<p>Funkcja normalize_audio służy do normalizacji sygnału audio y do zadanego zakresu amplitudy określonego przez parametry target_min i target_max. Najpierw oblicza minimalną i maksymalną wartość sygnału, a następnie skaluje wszystkie próbki tak, aby mieściły się w przedziale od 0 do 1. Następnie przekształca znormalizowane wartości do docelowego zakresu poprzez liniowe rozciągnięcie między target_min a target_max. W rezultacie otrzymujemy sygnał o tej samej charakterystyce, ale z amplitudami ograniczonymi do określonego przedziału. Funkcja zwraca znormalizowany sygnał i wypisuje na konsolę wartości przed i po normalizacji.</p>
+<p><strong>pogłos</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add_reverb</span><span class="hljs-params">(y, sr, reverb_amount=<span class="hljs-number">0.5</span>)</span>:</span>
+    <span class="hljs-string">"""Dodaje pogłos do sygnału audio."""</span>
+    reverb_kernel = np.zeros(int(sr * <span class="hljs-number">0.3</span>))  <span class="hljs-comment"># 300 ms pogłosu</span>
+    reverb_kernel[<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>
+    reverb_kernel[int(sr * <span class="hljs-number">0.03</span>)] = reverb_amount  <span class="hljs-comment"># 30 ms opóźnienia</span>
+    y_reverb = signal.fftconvolve(y, reverb_kernel, mode=<span class="hljs-string">'full'</span>)
+    <span class="hljs-keyword">return</span> y_reverb[:len(y)]
+</div></code></pre>
+<p>Funkcja add_reverb dodaje efekt pogłosu do sygnału audio y. Tworzy ona tablicę reverb_kernel, która reprezentuje jądro pogłosu o długości odpowiadającej 300 ms, z wartością 1 na początku i wartością reverb_amount po 30 ms, symulując opóźnienie odbicia. Następnie przeprowadza konwolucję sygnału y z tym jądrem za pomocą szybkiej transformaty Fouriera (FFT), co dodaje do sygnału efekt pogłosu. Wynikiem jest sygnał audio z dodanym pogłosem, przycięty do długości oryginalnego sygnału. Funkcja zwraca przetworzony sygnał, który brzmi tak, jakby był odtwarzany w pomieszczeniu z naturalnymi odbiciami dźwięku.</p>
+<p><strong>echo</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">add_echo</span><span class="hljs-params">(y, sr, delay=<span class="hljs-number">0.2</span>, decay=<span class="hljs-number">0.5</span>)</span>:</span>
+    <span class="hljs-string">"""Dodaje efekt echa do sygnału audio."""</span>
+    delay_samples = int(sr * delay)
+    echo_signal = np.zeros(len(y) + delay_samples)
+    echo_signal[:len(y)] = y
+    echo_signal[delay_samples:] += decay * y
+    <span class="hljs-keyword">return</span> echo_signal[:len(y)]
+</div></code></pre>
+<p>Funkcja add_echo dodaje efekt echa do sygnału audio y. Oblicza liczbę próbek odpowiadającą zadanemu opóźnieniu delay (domyślnie 0.2 sekundy) przez mnożenie częstotliwości próbkowania sr przez wartość opóźnienia. Następnie tworzy nową tablicę echo_signal, która jest rozszerzona o liczbę próbek opóźnienia, aby pomieścić echo. Kopiuje oryginalny sygnał do echo_signal i dodaje do niego opóźnioną kopię sygnału y, pomnożoną przez współczynnik zaniku decay (domyślnie 0.5), co symuluje stopniowe zanikanie echa. Na koniec zwraca sygnał z dodanym echem, przycięty do długości oryginalnego sygnału.</p>
+<p><strong>zmiana wysokości dźwięku</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pitch_shift</span><span class="hljs-params">(y, sr, n_steps)</span>:</span>
+    <span class="hljs-string">"""Zmienia wysokość dźwięku o podaną liczbę półtonów."""</span>
+    <span class="hljs-keyword">return</span> librosa.effects.pitch_shift(y, sr=sr, n_steps=n_steps)
+</div></code></pre>
+<p>Funkcja pitch_shift zmienia wysokość dźwięku sygnału audio y o określoną liczbę półtonów n_steps. Wykorzystuje metodę librosa.effects.pitch_shift do przetworzenia sygnału, zachowując oryginalny czas trwania audio. Parametr sr oznacza częstotliwość próbkowania sygnału i jest niezbędny dla poprawnego działania algorytmu. Poprzez modyfikację wartości n_steps, funkcja może podwyższyć lub obniżyć tonację dźwięku, efektywnie transponując go w górę lub w dół. Wynikiem jest przetworzony sygnał audio z nową wysokością dźwięku.</p>
+<p><strong>zmiana tempa</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">change_tempo</span><span class="hljs-params">(y, rate)</span>:</span>
+    <span class="hljs-string">"""Zmienia tempo odtwarzania sygnału audio."""</span>
+    <span class="hljs-keyword">return</span> librosa.effects.time_stretch(y, rate=rate)
+</div></code></pre>
+<p>Funkcja change_tempo zmienia tempo odtwarzania sygnału audio y o zadany współczynnik rate. Wykorzystuje metodę librosa.effects.time_stretch z biblioteki Librosa, która pozwala na zmianę tempa bez wpływu na wysokość dźwięku (tonację). Parametr rate określa proporcję zmiany tempa; wartość większa niż 1 przyspiesza odtwarzanie, a mniejsza niż 1 je spowalnia. Funkcja zwraca przetworzony sygnał audio z nowym tempem odtwarzania. Dzięki temu można dostosować prędkość utworu, zachowując jego oryginalną tonację i barwę.</p>
+<p><strong>zmiana głośności</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">amplify</span><span class="hljs-params">(y, factor)</span>:</span>
+    <span class="hljs-string">"""Zmienia głośność sygnału audio przez mnożenie amplitudy przez factor."""</span>
+    <span class="hljs-keyword">return</span> y * factor
+</div></code></pre>
+<p>Funkcja amplify zmienia głośność sygnału audio y poprzez mnożenie jego amplitudy przez zadany współczynnik factor. Jeżeli factor jest większy niż 1, sygnał zostanie podgłośniony; jeżeli jest mniejszy niż 1, sygnał zostanie przyciszony. Funkcja zwraca przetworzony sygnał z nowym poziomem głośności. Jest to bezpośrednia i efektywna metoda skalowania amplitudy sygnału bez wpływu na jego inne właściwości. Dzięki temu można łatwo dostosować głośność utworu do pożądanego poziomu odsłuchu.</p>
+<p><strong>zmiana basu i sopranu</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">bass_soprano</span><span class="hljs-params">(y, sr,  bass_factor=<span class="hljs-number">1</span>, soprano_factor=<span class="hljs-number">1</span>)</span>:</span>
+    <span class="hljs-string">"""Podgłaśnia basy mnoąc przez bass_factor i soprany mnozac przez soprano_factor. 
+    Oparte na implementacji https://librosa.org/doc/main/auto_examples/plot_vocal_separation.html """</span>
+    S_full, phase = librosa.magphase(librosa.stft(y))
+    <span class="hljs-comment"># Tworzenie filtru, ktory podzieli dzwiek na ten z czestotliwoscia ponizej i powyzej</span>
+    <span class="hljs-comment"># mediany czestotliwosci wystepujacych w calym nagraniu</span>
+    S_filter = librosa.decompose.nn_filter(S_full,
+                                       aggregate=np.mean,
+                                       metric=<span class="hljs-string">'cosine'</span>,
+                                       width=int(librosa.time_to_frames(<span class="hljs-number">2</span>, sr=sr)))
+    S_filter = np.minimum(S_full, S_filter)
+    
+    margin_i, margin_v = <span class="hljs-number">2</span>, <span class="hljs-number">10</span>
+    power = <span class="hljs-number">2</span>
+
+    <span class="hljs-comment"># Naloz maske aby podzielic nagranie na sopran i bas</span>
+    
+    mask_i = librosa.util.softmask(S_filter,
+                               margin_i * (S_full - S_filter),
+                               power=power)
+
+    mask_v = librosa.util.softmask(S_full - S_filter,
+                               margin_v * S_filter,
+                               power=power)
+
+    S_soprano = mask_v * S_full
+    S_bass = mask_i * S_full
+
+    y_soprano = librosa.istft(S_soprano * phase)
+    y_bass = librosa.istft(S_bass * phase)
+
+    y_soprano = y_soprano * soprano_factor
+    y_bass = y_bass * bass_factor
+
+    y_processed = y_soprano + y_bass 
+    <span class="hljs-keyword">return</span> y_processed
+</div></code></pre>
+<p>Funkcja bass_soprano umożliwia niezależne podgłaśnianie lub przyciszanie niskich (bas) i wysokich (sopran) częstotliwości w sygnale audio y. Wykorzystuje bibliotekę Librosa do przekształcenia sygnału w dziedzinę częstotliwości za pomocą transformaty STFT i oddzielenia fazy od amplitudy. Następnie tworzy maski częstotliwościowe, które pozwalają podzielić sygnał na komponenty basowe i sopranowe. Po zastosowaniu odpowiednich współczynników bass_factor i soprano_factor, skalowane sygnały są przekształcane z powrotem do dziedziny czasu i sumowane, aby uzyskać końcowy przetworzony sygnał. Funkcja zwraca sygnał audio z indywidualnie dostosowanymi poziomami basów i sopranów.</p>
+<h4 id="2-mainpy">2. <strong>main.py</strong></h4>
+<p><strong>wybór efektu</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">apply_effect</span><span class="hljs-params">(file_path, effect_name, *args)</span>:</span>
+    <span class="hljs-comment"># Wczytaj plik audio</span>
+    y, sr = librosa.load(file_path, sr=<span class="hljs-literal">None</span>)
+
+    <span class="hljs-comment"># Zastosowanie wybranego efektu</span>
+    <span class="hljs-keyword">if</span> effect_name == <span class="hljs-string">'normalize'</span>:
+        y_processed = normalize_audio(y, *args)
+    <span class="hljs-keyword">elif</span> effect_name == <span class="hljs-string">'reverb'</span>:
+        y_processed = add_reverb(y, sr, *args)
+    <span class="hljs-keyword">elif</span> effect_name == <span class="hljs-string">'echo'</span>:
+        y_processed = add_echo(y, sr, *args)
+    <span class="hljs-keyword">elif</span> effect_name == <span class="hljs-string">'pitch_shift'</span>:
+        y_processed = pitch_shift(y, sr, *args)
+    <span class="hljs-keyword">elif</span> effect_name == <span class="hljs-string">'tempo_change'</span>:
+        y_processed = change_tempo(y, *args)
+    <span class="hljs-keyword">elif</span> effect_name == <span class="hljs-string">'amplify'</span>:
+        y_processed = amplify(y, *args)
+    <span class="hljs-keyword">elif</span> effect_name == <span class="hljs-string">'attenuate'</span>:
+        y_processed = amplify(y, *args)
+    <span class="hljs-keyword">elif</span> effect_name == <span class="hljs-string">'bass_soprano'</span>:
+        y_processed = bass_soprano(y, sr, *args)
+    <span class="hljs-keyword">else</span>:
+        print(<span class="hljs-string">"Nieznany efekt."</span>)
+        <span class="hljs-keyword">return</span>
+
+    <span class="hljs-comment"># Zapis przetworzonego pliku</span>
+    output_path = <span class="hljs-string">'przetworzony_plik_audio.wav'</span>
+    sf.write(output_path, y_processed, sr)
+    print(<span class="hljs-string">f"Efekt został zastosowany i zapisany w '<span class="hljs-subst">{output_path}</span>'."</span>)
+</div></code></pre>
+<p>Funkcja apply_effect służy do zastosowania wybranego efektu dźwiękowego do pliku audio wskazanego przez file_path. Najpierw wczytuje plik audio za pomocą librosa.load, otrzymując sygnał audio y oraz częstotliwość próbkowania sr. Następnie, na podstawie podanej nazwy efektu effect_name, wywołuje odpowiednią funkcję przetwarzającą sygnał, taką jak normalize_audio, add_reverb, add_echo i inne, przekazując do niej sygnał y oraz ewentualne dodatkowe argumenty *args. Jeśli nazwa efektu nie jest rozpoznana, funkcja informuje o tym i kończy działanie. Po przetworzeniu sygnału, zapisuje zmodyfikowany dźwięk do pliku przetworzony_plik_audio.wav za pomocą soundfile.write i wyświetla komunikat potwierdzający pomyślne zastosowanie efektu oraz zapisanie pliku.</p>
+<p><strong>odtworzenie dźwięku</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">start</span><span class="hljs-params">(sound_path)</span>:</span>
+    <span class="hljs-keyword">global</span> is_playing
+    <span class="hljs-keyword">global</span> sound
+    <span class="hljs-keyword">global</span> sound_channel
+    is_playing = <span class="hljs-literal">True</span>
+    sound = mixer.Sound(sound_path)
+    sound_channel.play(sound)
+</div></code></pre>
+<p>Funkcja start(sound_path) inicjuje odtwarzanie pliku audio wskazanego przez argument sound_path. Na początku deklaruje zmienne globalne: is_playing, sound oraz sound_channel, aby umożliwić dostęp do nich w całym programie. Ustawia zmienną is_playing na True, co sygnalizuje, że odtwarzanie dźwięku jest aktywne. Następnie tworzy obiekt sound za pomocą metody mixer.Sound(sound_path), która wczytuje plik audio do pamięci. Na koniec wywołuje sound_channel.play(sound), co rozpoczyna odtwarzanie dźwięku na określonym kanale miksowania dźwięku. Funkcja ta umożliwia rozpoczęcie odtwarzania przetworzonego pliku audio w aplikacji, korzystając z biblioteki pygame.mixer do zarządzania dźwiękiem.</p>
+<p><strong>funkcja pauzy</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">pause</span><span class="hljs-params">()</span>:</span>
+    <span class="hljs-keyword">global</span> is_playing
+    <span class="hljs-keyword">global</span> sound_channel
+    <span class="hljs-keyword">global</span> sound
+    <span class="hljs-keyword">if</span>  is_playing :
+        is_playing = <span class="hljs-literal">False</span>
+        sound_channel.pause()
+    <span class="hljs-keyword">else</span> :
+        sound_channel.unpause()
+        is_playing = <span class="hljs-literal">True</span>
+</div></code></pre>
+<p>Funkcja pause działa analogicznie jak funkcja start. Jeśli dźwięk jest odtwarzany, funkcja go wstrzymuje i aktualizuje stan na False. Jeśli dźwięk jest wstrzymany, funkcja wznawia odtwarzanie i aktualizuje stan na True.</p>
+<h4 id="3-guipy">3. <strong>gui.py</strong></h4>
+<p><strong>tworzenie okna</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">create_window</span><span class="hljs-params">()</span>:</span>
+    layout = [
+        [sg.Text(<span class="hljs-string">'Wybierz plik audio:'</span>), sg.Input(), sg.FileBrowse(key=<span class="hljs-string">'file'</span>, button_text=<span class="hljs-string">"Przeglądaj"</span>)],
+        [sg.Text(<span class="hljs-string">'Wybierz efekt:'</span>)],
+        <span class="hljs-comment"># ... (elementy interfejsu dla różnych efektów) ...</span>
+        [sg.Button(<span class="hljs-string">'Zastosuj efekt'</span>)],
+        [sg.Button(<span class="hljs-string">'Start'</span>), sg.Button(<span class="hljs-string">'Pause'</span>)],
+        [sg.Button(<span class="hljs-string">'Wyjście'</span>)]
+    ]
+    <span class="hljs-keyword">return</span> sg.Window(<span class="hljs-string">'Procesor Dźwięku'</span>, layout, finalize=<span class="hljs-literal">True</span>)
+</div></code></pre>
+<p>Funkcja create_window() tworzy okno aplikacji graficznego interfejsu użytkownika (GUI) dla procesora dźwięku za pomocą biblioteki PySimpleGUI. Wewnątrz funkcji definiowany jest układ (layout), który określa rozmieszczenie i wygląd elementów interfejsu użytkownika. Funkcja zwraca gotowe do użycia okno aplikacji, które po uruchomieniu pozwala użytkownikowi na interaktywne przetwarzanie plików audio z wykorzystaniem różnych efektów dźwiękowych i dostosowywanie ich parametrów w przyjaznym interfejsie graficznym.</p>
+<p><strong>aktualizacja wyglądu okna</strong></p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">update_visibility</span><span class="hljs-params">(values, window)</span>:</span>
+    <span class="hljs-comment"># Hide all parameter controls</span>
+    <span class="hljs-keyword">for</span> key <span class="hljs-keyword">in</span> [<span class="hljs-string">'normalize_params'</span>, <span class="hljs-string">'reverb_params'</span>, <span class="hljs-string">'echo_params'</span>, <span class="hljs-string">'pitch_shift_params'</span>, <span class="hljs-string">'tempo_change_params'</span>, <span class="hljs-string">'amplify_params'</span>, <span class="hljs-string">'bass_soprano_params'</span>]:
+        window[key].update(visible=<span class="hljs-literal">False</span>)
+
+    <span class="hljs-comment"># Show parameter controls for the selected effect</span>
+    <span class="hljs-keyword">if</span> values[<span class="hljs-string">'reverb'</span>]:
+        window[<span class="hljs-string">'reverb_params'</span>].update(visible=<span class="hljs-literal">True</span>)
+    <span class="hljs-keyword">elif</span> values[<span class="hljs-string">'normalize'</span>]:
+        window[<span class="hljs-string">'normalize_params'</span>].update(visible=<span class="hljs-literal">True</span>)
+    <span class="hljs-keyword">elif</span> values[<span class="hljs-string">'echo'</span>]:
+        window[<span class="hljs-string">'echo_params'</span>].update(visible=<span class="hljs-literal">True</span>)
+    <span class="hljs-keyword">elif</span> values[<span class="hljs-string">'pitch_shift'</span>]:
+        window[<span class="hljs-string">'pitch_shift_params'</span>].update(visible=<span class="hljs-literal">True</span>)
+    <span class="hljs-keyword">elif</span> values[<span class="hljs-string">'tempo_change'</span>]:
+        window[<span class="hljs-string">'tempo_change_params'</span>].update(visible=<span class="hljs-literal">True</span>)
+    <span class="hljs-keyword">elif</span> values[<span class="hljs-string">'amplify'</span>]:
+        window[<span class="hljs-string">'amplify_params'</span>].update(visible=<span class="hljs-literal">True</span>)
+    <span class="hljs-keyword">elif</span> values[<span class="hljs-string">'bass_soprano'</span>]:
+        window[<span class="hljs-string">'bass_soprano_params'</span>].update(visible=<span class="hljs-literal">True</span>)
+</div></code></pre>
+<p>Funkcja update_visibility(values, window) zarządza widocznością paneli z parametrami efektów w interfejsie graficznym aplikacji, dostosowując je do aktualnie wybranego przez użytkownika efektu dźwiękowego. Na początku funkcja ukrywa wszystkie panele parametrów, iterując przez listę kluczy odpowiadających poszczególnym efektom (takich jak 'normalize_params', 'reverb_params', 'echo_params' itd.) i ustawiając ich widoczność na False za pomocą metody window[key].update(visible=False). Następnie sprawdza, który efekt został wybrany przez użytkownika, analizując słownik values, który zawiera aktualne stany wszystkich elementów interfejsu.</p>
+<hr>
+<h3 id="zrzuty-z-dzia%C5%82ania-programu">Zrzuty z działania programu</h3>
+<p>Domyślny interfejs użytkownika:</p>
+<p><img src="screens/start.png" alt="alt text" title="Domyślny interfejs użytkownika"></p>
+<p>Błąd o braku wczytania pliku audio:</p>
+<p><img src="screens/error.png" alt="alt text" title="Błąd o braku wczytania pliku audio"></p>
+<p>Wybór parametrów normalizacji:</p>
+<p><img src="screens/normalizacja.png" alt="alt text" title="Wybór parametrów normalizacji"></p>
+<p>Wybór parametrów pogłosu:</p>
+<p><img src="screens/poglos.png" alt="alt text" title="Wybór parametrów pogłosu"></p>
+<p>Wybór parametrów echa:</p>
+<p><img src="screens/echo.png" alt="alt text" title="Wybór parametrów echa"></p>
+<p>Wybór parametrów zmiany wysokości dźwięku:</p>
+<p><img src="screens/wysokosc.png" alt="alt text" title="Wybór parametrów zmiany wysokości dźwięku"></p>
+<p>Wybór parametrów zmiany tempa dźwięku:</p>
+<p><img src="screens/tempo.png" alt="alt text" title="Wybór parametrów zmiany tempa dźwięku"></p>
+<p>Wybór parametrów pogłośnienia i ściszenia:</p>
+<p><img src="screens/podglosnianie.png" alt="alt text" title="Wybór parametrów pogłośnienia i ściszenia"></p>
+<p>Wybór parametrów dostosowania głośności basów i sopranów:</p>
+<p><img src="screens/bas-sopran.png" alt="alt text" title="Wybór parametrów dostosowania głośności basów i sopranów"></p>
+<p>Informacja o przetworzeniu:</p>
+<p><img src="screens/przetworzony.png" alt="alt text" title="Informacja o przetworzeniu"></p>
+
+</body>
+</html>
