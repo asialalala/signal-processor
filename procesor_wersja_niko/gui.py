@@ -19,8 +19,8 @@ def create_window():
         # Reverb Effect
         [sg.Radio('Pogłos', 'effect', key='reverb', enable_events=True)],
         [sg.pin(sg.Column([
-            [sg.Text('Poziom pogłosu (0.0 - 1.0):')],
-            [sg.Slider(range=(0, 1), resolution=0.1, orientation='h', key='reverb_amount')],
+            [sg.Text('Poziom pogłosu (0.0 - 4.0):')],
+            [sg.Slider(range=(0, 4), resolution=0.1, orientation='h', key='reverb_amount')],
         ], key='reverb_params', visible=False))],
 
         # Echo Effect
