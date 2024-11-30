@@ -2,6 +2,7 @@
 import numpy as np
 import librosa
 import scipy.signal as signal
+import matplotlib.pyplot as plt
 
 def normalize_audio(y):
     """Normalizuje sygnał audio do zakresu [-1, 1]."""
@@ -35,14 +36,14 @@ def amplify(y, factor):
     """Podgłaśnia sygnał audio przez mnożenie amplitudy przez factor."""
     return y * factor
 
-def bass_soprano(y, sr,  bass_factor, soprano_factor):
+def bass_soprano(y, sr,  bass_factor=1, soprano_factor=1):
     """Podgłaśnia basy mnoąc przez bass_factor i soprany mnozac przez soprano_factor. 
     Oparte na implementacji https://librosa.org/doc/main/auto_examples/plot_vocal_separation.html """
     S_full, phase = librosa.magphase(librosa.stft(y))
     # Tworzenie filtru, ktory podzieli dzwiekna na ten z czestotliwoscia poniezej i powyzej
     # mediany czestotliwosci wystepujacych w calym nagraniu
     S_filter = librosa.decompose.nn_filter(S_full,
-                                       aggregate=np.median,
+                                       aggregate=np.mean,
                                        metric='cosine',
                                        width=int(librosa.time_to_frames(2, sr=sr)))
     S_filter = np.minimum(S_full, S_filter)
@@ -51,6 +52,7 @@ def bass_soprano(y, sr,  bass_factor, soprano_factor):
     power = 2
 
     # Naloz maske aby podzielic nagranie na sopran i bas
+    
     mask_i = librosa.util.softmask(S_filter,
                                margin_i * (S_full - S_filter),
                                power=power)
@@ -58,10 +60,25 @@ def bass_soprano(y, sr,  bass_factor, soprano_factor):
     mask_v = librosa.util.softmask(S_full - S_filter,
                                margin_v * S_filter,
                                power=power)
+
     S_soprano = mask_v * S_full
     S_bass = mask_i * S_full
 
-    y_soprano = librosa.istft(S_soprano * phase) #* soprano_factor
-    y_bass = librosa.istft(S_bass * phase) #* bass_factor
+    y_soprano = librosa.istft(S_soprano * phase)
+    y_bass = librosa.istft(S_bass * phase)
+    print("y_soprano ")
+    print(y_soprano )
+    print("y_bass ")
+    print(y_bass )
+
+    print("soprano_factor ", soprano_factor)
+    print("bass_factor ", bass_factor)
+    y_soprano = y_soprano * soprano_factor
+    y_bass = y_bass * bass_factor
+    print("y_soprano ")
+    print(y_soprano )
+    print("y_bass ")
+    print(y_bass )
+
     y_processed = y_soprano + y_bass # tutaj chyba inaczej powinien byc dodany ten dzwiek
     return y_processed

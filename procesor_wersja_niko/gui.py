@@ -58,9 +58,9 @@ def create_window():
         [sg.Radio('Bas i sopran', 'effect', key='bass_soprano', enable_events=True)],
         [sg.pin(sg.Column([
             [sg.Text('Współczynnik zgłośnienia basu (np. 0.5):')],
-            [sg.Slider(range=(0, 1), resolution=0.1, orientation='h', key='volume_bas_factor')],
+            [sg.Slider(range=(0, 4), resolution=0.1, orientation='h', key='volume_bas_factor')],
             [sg.Text('Współczynnik zgłośnienia sopranu (np. 0.5):')],
-            [sg.Slider(range=(0, 1), resolution=0.1, orientation='h', key='volume_soprano_factor')],
+            [sg.Slider(range=(0, 4), resolution=0.1, orientation='h', key='volume_soprano_factor')],
         ], key='bass_soprano_params', visible=False))],
 
         # Test sample
@@ -141,7 +141,7 @@ def main():
                 apply_effect(file_path, 'amplify', factor)
             elif values['bass_soprano']:
                 bass_factor = values['volume_bas_factor']
-                soprano_factor = values['volume_bas_factor']
+                soprano_factor = values['volume_soprano_factor']
                 apply_effect(file_path, 'bass_soprano', bass_factor, soprano_factor)
 
             effect_created = True
